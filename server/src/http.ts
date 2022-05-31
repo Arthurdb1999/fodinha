@@ -7,6 +7,11 @@ const app = express()
 
 const serverHttp = http.createServer(app)
 
-const io = new Server(serverHttp)
+const io = new Server(serverHttp, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST", "DELETE"]
+    }
+})
 
 export { serverHttp, io }

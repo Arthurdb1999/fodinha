@@ -48,8 +48,12 @@ io.on("connection", socket => {
     //     io.to(data.room).emit("message", message)
     // })
 
+    socket.on("ENTER_ROOM", data => {
+        console.log(users)
+        if (users.length === 0) {
+            socket.emit("IS_HOST", true)
+        }
 
-    socket.on("enter", (data, callback) => {
         const userInRoom = users.find(user => user.username === data.username)
 
         if (userInRoom) {
@@ -59,12 +63,12 @@ io.on("connection", socket => {
                 username: data.username,
                 socket_id: socket.id
             })
-
-            // TODO -> deal cards to the connected user
-            const { suit, number, cards } = shuffle()
-            const card = { suit, number }
-            callback(card)
         }
     })
-})
 
+    socket.on("DEAL_CARDS", () => {
+        // io.sockets.allSockets().then()
+        users.forEach(user => )
+    })
+
+})

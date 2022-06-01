@@ -1,9 +1,13 @@
 import express from 'express'
 import http from 'http'
 import { Server } from 'socket.io'
+import routes from './routes'
 
 // Criação de um server com req/res e outro com sockets
 const app = express()
+
+app.use(express.json())
+app.use(routes)
 
 const serverHttp = http.createServer(app)
 

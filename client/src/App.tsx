@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client'
+import React, { useState } from 'react';
+import { socket } from './url'
+import { useHistory } from 'react-router-dom'
 
 interface Cards {
   clubs: Number[],
@@ -10,53 +11,35 @@ interface Cards {
 
 function App() {
 
-  const socket = io("http://localhost:3333")
+  const history = useHistory()
 
   const [username, setUsername] = useState('')
-  const [logged, setLogged] = useState(false)
-
-  useEffect(() => {
-
-  }, [])
 
   function enterGame() {
-    socket.emit("enter", {
+    socket.emit("ENTER_ROOM", {
       username
-    }, (cards: Cards) => {
-      console.log(cards)
     })
-
-    setLogged(true)
+  
+    history.push({
+      pathname: '/play',
+      state: { username }
+    })
   }
 
   return (
     <div className="App">
-      {!logged
-        ? (
-          <>
-            <label htmlFor="username">Digite seu nome de usuário</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              onChange={e => setUsername(e.target.value)}
-            />
+      <label htmlFor="username">Digite seu nome de usuário</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        onChange={e => setUsername(e.target.value)}
+      />
 
-            <button
-              onClick={() => enterGame()}>
-              Entrar
-            </button>
-          </>
-        ) : (
-          <div>
-            <div className='myCards'>
-              <div className='card'>
-                <span>2 de espadas</span>
-              </div>
-            </div>
-          </div>
-        )}
-
+      <button
+        onClick={enterGame}>
+        Entrar
+      </button>
     </div>
   );
 }

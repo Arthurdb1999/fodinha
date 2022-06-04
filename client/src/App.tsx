@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { socket } from './url'
 import { useHistory } from 'react-router-dom'
-
-interface Cards {
-  clubs: Number[],
-  hearts: Number[],
-  spades: Number[],
-  diamonds: Number[]
-}
+import { User } from './Play';
 
 function App() {
 
@@ -15,14 +9,16 @@ function App() {
 
   const [username, setUsername] = useState('')
 
+  socket.on("NEW_USER", (data: { user: User }) => {
+    history.push({
+      pathname: '/play',
+      state: { user: data.user }
+    })
+  })
+
   function enterGame() {
     socket.emit("ENTER_ROOM", {
       username
-    })
-  
-    history.push({
-      pathname: '/play',
-      state: { username }
     })
   }
 

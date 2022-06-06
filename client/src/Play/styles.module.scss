@@ -1,0 +1,39 @@
+.Play {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+}
+
+.Header {
+    height: 10%;
+    width: 100%;
+    width: auto;
+    display: flex;
+}
+
+.Table {
+    display: flex;
+    flex-direction: row;
+    height: 70%;
+}
+
+.MyHand {
+    display: flex;
+    height: 20%;
+    flex-direction: row;
+    justify-content: center;
+
+    button {
+        margin-right: 1rem;
+        background: none;
+        height: fit-content;
+        width: fit-content;
+        & img {
+            border-radius: 0.25rem;
+            width: 5rem;
+            height: 7.5rem;
+        }
+    }
+}

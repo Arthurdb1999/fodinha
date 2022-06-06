@@ -1,7 +1,7 @@
-import { Cards, defaultCards } from "./cards"
+import { Card, defaultCards } from "./cards"
 
 
-export function shuffle(cards: Cards[]) {
+export function shuffle(cards: Card[]) {
     if (cards.length === 0) cards = defaultCards
     const randomNumber = Math.floor(Math.random() * cards.length)
     const raffledCard = cards[randomNumber]

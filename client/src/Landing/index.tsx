@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { socket } from './url'
+import { socket } from '../services/api'
 import { useHistory } from 'react-router-dom'
-import { User } from './Play';
+import { User } from '../Play';
+import '../global.scss'
 
 function App() {
 
